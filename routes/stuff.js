@@ -26,7 +26,10 @@ router.get('/consumables', stuffCtrl.getAllConsumables);
 
 //update consumable unique
 
- 
+// historique des prix d'un consomable
+router.get('/consumablesHisto/:id', stuffCtrl.getConsumableHisto);
+
+
 // recuperer tout les resources (avec filtres)
 router.get('/resources', stuffCtrl.getAllRessources);
 

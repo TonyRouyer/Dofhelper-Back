@@ -122,24 +122,22 @@ exports.updateGear = async (req, res, next) => {
 exports.getGearHisto = async (req, res, next) => {
     try {
         const id_item = parseInt(req.params.id);
-    
+
         // Fetch price history from the database
-        console.log(id_item);
-        const priceHistory = await GearPrice.find({ "id_item" : id_item  });
-        console.log(priceHistory);
+        const priceHistory = await GearPrice.find({ "id_item": id_item });
         // Ensure the data is returned in the expected format
         const formattedHistory = priceHistory.map(record => ({
-          date: record.recordDate.toISOString(),
-          price: record.market_price,
+            date: record.recordDate.toISOString(),
+            price: record.market_price,
 
         }));
-    
+
         res.json(formattedHistory);
-      } catch (error) {
+    } catch (error) {
         console.error('Error fetching price history:', error);
         res.status(500).json({ error: 'Error fetching price history' });
-      }
-      
+    }
+
 }
 
 
@@ -161,7 +159,6 @@ exports.getAllRessources = async (req, res, next) => {
 
         // Filtrer les gears avec recette
         if (hasRecipe) {
-            console.log('has recipe');
             query.recipe = { $exists: true, $ne: [] };
         }
 
@@ -204,25 +201,23 @@ exports.getAllRessources = async (req, res, next) => {
 exports.getRessourceHisto = async (req, res, next) => {
     try {
         const id_item = parseInt(req.params.id);
-    
+
         // Fetch price history from the database
-        console.log(id_item);
-        const priceHistory = await ResourcePrice.find({ "id_item" : id_item  });
-        console.log(priceHistory);
+        const priceHistory = await ResourcePrice.find({ "id_item": id_item });
         // Ensure the data is returned in the expected format
         const formattedHistory = priceHistory.map(record => ({
-          date: record.recordDate.toISOString(),
-          price1: record.price_1,
-          price10: record.price_10,
-          price100: record.price_100
+            date: record.recordDate.toISOString(),
+            price1: record.price_1,
+            price10: record.price_10,
+            price100: record.price_100
         }));
-    
+
         res.json(formattedHistory);
-      } catch (error) {
+    } catch (error) {
         console.error('Error fetching price history:', error);
         res.status(500).json({ error: 'Error fetching price history' });
-      }
-      
+    }
+
 }
 
 
@@ -276,6 +271,10 @@ exports.getAllConsumables = async (req, res, next) => {
         // Exécuter la requête
         let consumables = await Consumables.find(query);
 
+
+        consumables.sort((a, b) => b.gain - a.gain); // Tri par gain décroissant (par défaut)
+
+
         // Limiter les résultats
         consumables = consumables.slice(0, limit);
 
@@ -286,6 +285,31 @@ exports.getAllConsumables = async (req, res, next) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+exports.getConsumableHisto = async (req, res, next) => {
+    try {
+        const id_item = parseInt(req.params.id);
+
+        // Fetch price history from the database
+        const priceHistory = await ConsumablePrice.find({ "id_item": id_item });
+        // Ensure the data is returned in the expected format
+        const formattedHistory = priceHistory.map(record => ({
+            date: record.recordDate.toISOString(),
+            price1: record.price_1,
+            price10: record.price_10,
+            price100: record.price_100
+        }));
+
+        res.json(formattedHistory);
+    } catch (error) {
+        console.error('Error fetching price history:', error);
+        res.status(500).json({ error: 'Error fetching price history' });
+    }
+
+}
+
+
+
 
 
 exports.getShopping = async (req, res, next) => {
@@ -319,7 +343,7 @@ exports.resetShopping = async (req, res, next) => {
         }
 
         // Renvoyer les résultats au format JSON
-         res.status(200).json({ message: 'Ressources reset' });
+        res.status(200).json({ message: 'Ressources reset' });
     } catch (error) {
         // Gérer les erreurs
         res.status(400).json({ error: error.message });

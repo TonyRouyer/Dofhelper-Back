@@ -38,9 +38,9 @@ def scrape_vulbis_page(type):
 
     # Define the URL based on the type
     urls = {
-        "gears": "https://www.vulbis.com/?server=Imagiro&gids=&percent=0&craftableonly=false&select-type=1000000&sellchoice=false&buyqty=1&sellqty=1&percentsell=0",
-        "resources": "https://www.vulbis.com/?server=Imagiro&gids=&percent=0&craftableonly=false&select-type=1000002&sellchoice=false&buyqty=1&sellqty=1&percentsell=0",
-        "consumables": "https://www.vulbis.com/?server=Imagiro&gids=&percent=0&craftableonly=false&select-type=1000001&sellchoice=false&buyqty=1&sellqty=1&percentsell=0"
+        "gears": "https://www.vulbis.com/?server=Draconiros&gids=&percent=0&craftableonly=false&select-type=1000000&sellchoice=false&buyqty=1&sellqty=1&percentsell=0",
+        "resources": "https://www.vulbis.com/?server=Draconiros&gids=&percent=0&craftableonly=false&select-type=1000002&sellchoice=false&buyqty=1&sellqty=1&percentsell=0",
+        "consumables": "https://www.vulbis.com/?server=Draconiros&gids=&percent=0&craftableonly=false&select-type=1000001&sellchoice=false&buyqty=1&sellqty=1&percentsell=0"
     }
 
     driver.execute_script(f'''window.open("{urls[type]}","_blank");''')  # open page in new tab
