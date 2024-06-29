@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 
 
 // connection a la bdd distante
-mongoose.connect('mongodb+srv://***:****@cluster0.j5za9ah.mongodb.net/dofHelper?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://***:***@cluster0.j5za9ah.mongodb.net/dofHelper?retryWrites=true&w=majority')
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 

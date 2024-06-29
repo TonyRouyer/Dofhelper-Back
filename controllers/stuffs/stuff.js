@@ -156,7 +156,6 @@ exports.getAllRessources = async (req, res, next) => {
         // Construire la requête de base
         let query = {};
 
-
         // Filtrer les gears avec recette
         if (hasRecipe) {
             query.recipe = { $exists: true, $ne: [] };
@@ -169,12 +168,6 @@ exports.getAllRessources = async (req, res, next) => {
 
         if (categ !== undefined) {
             query.type = categ;
-        }
-
-        // Filtrer par ratioBtSMin
-        if (ratioBtSMin !== undefined) {
-            query.ratioBtS = { $exists: true }; // S'assurer que ratioBtS est défini
-            query.ratioBtS.$elemMatch = { $gte: ratioBtSMin };
         }
 
         // Exécuter la requête
